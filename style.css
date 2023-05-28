@@ -202,8 +202,6 @@ input[type=text]:hover {
   margin: 0 25px;
   padding: 0;
   font-family: "Lulo Bold";
-  inline-size: 100px;
-  overflow-wrap: break-word;
 }
 #drink-list .drink-list--drink .drink-ingredients {
   margin: 5px 0;
