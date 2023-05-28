@@ -1,50 +1,7 @@
-function showRecipe(
-  instructions,
-  ingredients,
-  measurements,
-  drinkName,
-  isAlcoholic,
-  drinkCategory,
-  glassType,
-  thumbnail
-) {
-  const modal = document.getElementById("recipe-modal");
-  const drinkInfo = document.getElementById("recipe--drink-info");
-  const drinkIngredients = document.getElementById("recipe--drink-ingredients");
-
-  ingredients = ingredients.split(",");
-  measurements = measurements.split(",");
-
-  for (let ingredient in ingredients) {
-    ingredients[ingredient] = `<span style="font-family: 'Lulo Bold'">${
-      measurements[ingredient] == undefined ? "" : measurements[ingredient]
-    }</span> ${ingredients[ingredient]}`;
-  }
-
-  modal.showModal();
-
-  // Set drink name header
-  modal.querySelector("#recipe--drink-name").innerHTML = drinkName;
-  modal.querySelector("#recipe--instructions").innerHTML = instructions;
-  modal.querySelector("#recipe--glass-type").innerHTML = `Glass: ${glassType}`;
-  modal.querySelector("#recipe--drink-thumb").src = thumbnail;
-
-  // Set drink ingredients
-  drinkIngredients.innerHTML = `${ingredients
-    .map((ingredient) => `<li>${ingredient}</li>`)
-    .join("")}`;
-
-  // Set drink info
-  drinkInfo.innerHTML = `
-    <li>${isAlcoholic}</li>
-    <li>${drinkCategory}</li>
-    <li></li>
-    <li></li>
-  `;
-}
-
 const drinkListContainer = document.getElementById("drink-list-container");
+const favoriteDrinks = [];
 
+//#region Drink Functions
 async function fetchDrink(query) {
   // queries: s= search by drink name, i= serach by ingredient name, f= search by first letter,
 
@@ -166,8 +123,6 @@ async function fetchDrink(query) {
       }
       //#endregion
 
-      console.log(drink);
-
       return `
         <li>
           <div class="drink-list--drink">
@@ -214,6 +169,52 @@ async function fetchDrink(query) {
       `;
     })
     .join("");
+}
+//#endregion
+
+function showRecipe(
+  instructions,
+  ingredients,
+  measurements,
+  drinkName,
+  isAlcoholic,
+  drinkCategory,
+  glassType,
+  thumbnail
+) {
+  const modal = document.getElementById("recipe-modal");
+  const drinkInfo = document.getElementById("recipe--drink-info");
+  const drinkIngredients = document.getElementById("recipe--drink-ingredients");
+
+  ingredients = ingredients.split(",");
+  measurements = measurements.split(",");
+
+  for (let ingredient in ingredients) {
+    ingredients[ingredient] = `<span style="font-family: 'Lulo Bold'">${
+      measurements[ingredient] == undefined ? "" : measurements[ingredient]
+    }</span> ${ingredients[ingredient]}`;
+  }
+
+  modal.showModal();
+
+  // Set drink name header
+  modal.querySelector("#recipe--drink-name").innerHTML = drinkName;
+  modal.querySelector("#recipe--instructions").innerHTML = instructions;
+  modal.querySelector("#recipe--glass-type").innerHTML = `Glass: ${glassType}`;
+  modal.querySelector("#recipe--drink-thumb").src = thumbnail;
+
+  // Set drink ingredients
+  drinkIngredients.innerHTML = `${ingredients
+    .map((ingredient) => `<li>${ingredient}</li>`)
+    .join("")}`;
+
+  // Set drink info
+  drinkInfo.innerHTML = `
+    <li>${isAlcoholic}</li>
+    <li>${drinkCategory}</li>
+    <li></li>
+    <li></li>
+  `;
 }
 
 async function init() {
