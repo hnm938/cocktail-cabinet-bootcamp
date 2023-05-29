@@ -7,18 +7,29 @@
     <script src="./script.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <link rel="icon" type="image/x-icon" href="./assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Cocktail Cabinet</title>
   </head>
   <body>
     <header>
       <h1>Cocktail Cabinet</h1>
     </header>
-    <div id="title-logo">
-      <img src="./assets/favicon.png" alt="website logo" />
+    <div
+      id="title-logo"
+      class="h-[150px] w-auto aspect-square mx-auto my-[25px] flex items-center justify-center border-4 border-black rounded-full"
+    >
+      <img class="w-[60%] h-auto aspect-square" src="./assets/favicon.png" alt="website logo" />
     </div>
     <!-- Search Container -->
-    <div id="drink-search-container">
-      <label for="drink-search">Search Drinks</label>
+    <div
+      id="drink-search-container"
+      style="white-space: nowrap"
+      class="min-w-[500px] w-1/2 mx-auto mt-[25px] mb-[10px] flex flex-col items-center gap-y-[15px] gap-x-[10px]"
+    >
+      <label
+        for="drink-search"
+        class="w-1/2 pb-[5px] text-center text-2xl"
+      >Search Drinks</label>
       <div
         style="
           width: 100%;
@@ -33,8 +44,10 @@
           name="drink-search"
           id="drink-search"
           placeholder="Sex on the Beach 😈"
+          class="h-[50px] w-[90%] p-[10px] text-center"
         />
         <button
+          class="min-w-1/10 p-[10px]"
           onclick="fetchDrink(`s=${document.getElementById('drink-search').value}`)"
         >
           Search
@@ -42,39 +55,52 @@
       </div>
     </div>
     <!-- Drink Categories -->
-    <div id="drink-categories">
-      <button onclick="fetchDrink('s=coffee')">Caffeinated ☕</button>
-      <button onclick="fetchDrink('s=fruit')">Fruity 🍇</button>
-      <button onclick="fetchDrink('s=fizz')">Fizzy Drinks 🥤</button>
-      <button onclick="fetchDrink('s=milk')">Milk Based 🥛</button>
-      <button onclick="fetchDrink('s=beer')">Beer 🍺</button>
-      <button onclick="fetchDrink('s=wine')">Wine 🍷</button>
-      <button onclick="fetchDrink('s=tea')">Teas 🧋</button>
-      <button onclick="fetchDrink('s=sex')">🥵</button>
+    <div id="drink-categories" class="my-[25px] grid grid-rows-2 grid-flow-col gap-y-[5px] gap-x-[10px] lg:w-1/2 lg:mx-auto lg:grid-rows-2 sm:grid-rows-4 sm:w-[90%] sm:mx-auto">
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=coffee')">Caffeinated ☕</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=fruit')">Fruity 🍇</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=fizz')">Fizzy Drinks 🥤</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=milk')">Milk Based 🥛</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=beer')">Beer 🍺</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=wine')">Wine 🍷</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=tea')">Teas 🧋</button>
+      <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=sex')">🥵</button>
     </div>
     <!-- Container for letter category buttons  -->
-    <div id="drink-letters-category"></div>
+    <div 
+      id="drink-letters-category"
+      class="w-1/2 mx-auto mb-[50px] flex flex-row items-center justify-center gap-x-[10px]"  
+    ></div>
     <!-- Holds all query results as list items -->
     <div id="drink-list-container">
-      <ul id="drink-list"></ul>
+      <ul id="drink-list" class="list-none"></ul>
     </div>
     <!-- Recipe modal -->
     <dialog id="recipe-modal">
-      <div id="recpie-modal--container">
-        <header>
-          <h1 id="recipe--drink-name">Gin Fizz</h1>
+      <div
+        id="recipe-modal--container"
+        class="w-[750px] h-fit max-h-9/10 min-h-[500px] fixed left-50 translate-x-[-50%] top-10 overflow-y-auto overflow-x-hidden flex flex-col items-center justify-center"
+      >
+        <header class="w-full py-0 px-[75px] mb-[35px]">
+          <h1 id="recipe--drink-name" class="w-fit">Gin Fizz</h1>
         </header>
-        <div style="display: flex; flex-direction: row; margin-bottom: 15px">
+        <!-- Ingredients & About -->
+        <div class="flex flex-row mb-[15px]">
+          <!-- Ingredients List -->
           <div id="recipe--ingredients">
             <h2>Ingredients</h2>
             <ul id="recipe--drink-ingredients"></ul>
           </div>
-          <div id="recipe--about">
-            <h2>About</h2>
+          <!-- About List -->
+          <div
+            id="recipe--about"
+            class="flex flex-col items-center justify-center"  
+          >
+            <h2 class="mb-[10px]">About</h2>
             <ul id="recipe--drink-info"></ul>
             <img src="" id="recipe--drink-thumb" alt="drink thumbnail" />
           </div>
         </div>
+        <!-- Recipe Description -->
         <h2 style="width: calc(100% - (75px * 2))">Recipe</h2>
         <p
           id="recipe--glass-type"
@@ -88,6 +114,7 @@
         <p id="recipe--instructions" style="margin: 0 0 25px 0"></p>
         <button
           id="recipe--close-btn"
+          class="w-[80%] py-[10px] mb-[25px]"
           onclick="this.parentNode.parentNode.close()"
         >
           Close
