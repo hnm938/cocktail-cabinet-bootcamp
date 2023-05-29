@@ -1,7 +1,60 @@
+
+function updateSuggestions(searchTerm) {
+  const suggestionsList = document.getElementById("suggestions-list");
+  const searchInput = document.getElementById("drink-search");
+
+  if (searchTerm.length > 0) {
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const drinks = data.drinks;
+        suggestionsList.innerHTML = ""; 
+
+        if (drinks) {
+          for (let i = 0; i < drinks.length && i < 5; i++) {
+            const drinkName = drinks[i].strDrink;
+            const li = document.createElement("li");
+            li.textContent = drinkName;
+            li.onclick = function () {
+              searchInput.value = drinkName;
+              suggestionsList.style.display = "none";
+            };
+            suggestionsList.appendChild(li);
+          }
+        }
+
+        if (drinks && drinks.length > 0) {
+          suggestionsList.style.display = "block";
+        } else {
+          suggestionsList.style.display = "none";
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        suggestionsList.style.display = "none";
+      });
+  } else {
+    suggestionsList.innerHTML = "";
+    suggestionsList.style.display = "none";
+  }
+}
+
+// Event listener to hide the dropdown menu when clicking outside
+window.addEventListener("click", function (event) {
+  const suggestionsList = document.getElementById("suggestions-list");
+  const searchInput = document.getElementById("drink-search");
+
+  if (
+    event.target !== suggestionsList &&
+    event.target !== searchInput &&
+    !suggestionsList.contains(event.target)
+  ) {
+    suggestionsList.style.display = "none";
+  }
+});
+
 const drinkListContainer = document.getElementById("drink-list-container");
 const favoriteDrinks = [];
-
-//#region Drink Functions
 async function fetchDrink(query) {
   // queries: s= search by drink name, i= serach by ingredient name, f= search by first letter,
 
@@ -170,7 +223,6 @@ async function fetchDrink(query) {
     })
     .join("");
 }
-//#endregion
 
 function showRecipe(
   instructions,
@@ -229,6 +281,18 @@ async function init() {
   `
     )
     .join("");
+    const searchInput = document.getElementById("drink-search");
+
+searchInput.addEventListener("keydown", function (event) {
+  
+  if (event.key === "Enter") {
+    event.preventDefault();
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm.length > 0) {
+      fetchDrink(`s=${searchTerm}`);
+    }
+  }
+});
 }
 
 window.onload = () => {
