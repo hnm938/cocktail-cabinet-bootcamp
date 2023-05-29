@@ -126,7 +126,7 @@ async function fetchDrink(query) {
       return `
         <li>
           <div class="drink-list--drink">
-            <div style="display: flex; flex-direction: row">
+            <div class="flex flex-row gap-x-[50px]">
               <img src="${drink.strDrinkThumb}" alt="drink thumbnail">
               <div>
                 <h1 class="drink-name">${drink.strDrink}</h1>

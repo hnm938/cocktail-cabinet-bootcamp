@@ -60,88 +60,15 @@ input[type=text]:hover {
   background-color: rgba(245, 245, 245, 0.1);
 }
 
-#title-logo {
-  height: 150px;
-  width: auto;
-  aspect-ratio: 1;
-  margin: 25px auto 25px auto;
-  border: solid black 4px;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#title-logo img {
-  width: 60%;
-  height: auto;
-  aspect-ratio: 1;
-}
-
-#drink-search-container {
-  width: 50%;
-  margin: 25px auto 10px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px 10px;
-  white-space: nowrap;
-}
+/* #region drink-search-container */
 #drink-search-container label {
-  width: 50%;
-  padding-bottom: 5px;
-  text-align: center;
-  font-size: 22px;
   font-family: "Lulo Bold";
   border-bottom: solid black 2px;
 }
-#drink-search-container button {
-  min-width: 10%;
-}
-#drink-search-container input[type=text] {
-  width: 90%;
-  text-align: center;
-  font-family: "Lulo Bold";
-}
-#drink-search-container input[type=text]::-moz-placeholder {
-  font-family: "Lulo";
-}
-#drink-search-container input[type=text]::placeholder {
-  font-family: "Lulo";
-}
-#drink-search-container input[type=text],
-#drink-search-container button {
-  height: 50px;
-  padding: 5px 10px;
-}
+#drink-search-container input[type=text] { font-family: "Lulo Bold"; }
+/* #endregion */
 
-#drink-categories {
-  width: 50%;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin: 25px auto;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px 10px;
-}
-#drink-categories button {
-  min-height: -moz-fit-content;
-  min-height: fit-content;
-  padding: 10px 0;
-  white-space: nowrap;
-  letter-spacing: 0.05em;
-}
-
-#drink-letters-category {
-  width: 50%;
-  margin: 0 auto 50px auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0 10px;
-}
+/* #region drink-letters-category */
 #drink-letters-category button {
   border: none;
   font-family: "Lulo Bold";
@@ -150,13 +77,23 @@ input[type=text]:hover {
   cursor: pointer;
   transition: all 350ms ease;
 }
-#drink-letters-category button:hover {
-  color: gray;
-}
+#drink-letters-category button:hover { color: gray; }
+/* #endregion */
 
-#drink-list {
-  list-style-type: none;
+/* #region drink-list */
+#drink-list h2 {
+  text-align: left;
+  padding: 0 10px 5px 0 !important;
+  margin: 0 0 10px 0;
+  transform: translateX(-20px);
 }
+#drink-list hr {
+  margin: 50px 0;
+}
+/* #endregion */
+
+/* #region drink-list--drink */
+/* !! Do not replace with tailwind inline css */
 #drink-list .drink-list--drink {
   height: -moz-fit-content;
   height: fit-content;
@@ -175,7 +112,11 @@ input[type=text]:hover {
   font-weight: 300;
 }
 #drink-list .drink-list--drink h1 {
+  transform: translateX(-45px);
   font-weight: 400;
+  font-size: 30px;
+  text-align: left;
+  max-width: 400px;
 }
 #drink-list .drink-list--drink img {
   width: auto;
@@ -214,6 +155,9 @@ input[type=text]:hover {
   padding: 10px 0 !important;
   font-size: 20px;
 }
+/* #endregion */
+
+/* #region list-splitter */
 #drink-list .list-splitter {
   width: 100%;
   height: 0px;
@@ -227,6 +171,9 @@ input[type=text]:hover {
   transform: scaleY(0.45) translateY(-10px);
   height: 200px;
 }
+/* #endregion */
+
+/* #region recipe-button */
 #drink-list .recipe-button {
   margin: 0 0 10px 0;
   width: 30%;
@@ -241,77 +188,33 @@ input[type=text]:hover {
   opacity: 1;
   filter: brightness(0.9);
 }
-#drink-list h2 {
-  text-align: left;
-  padding: 0 10px 5px 0 !important;
-  margin: 0 0 10px 0;
-  transform: translateX(-20px);
-}
-#drink-list hr {
-  margin: 50px 0;
-}
+/* #endregion */
 
-#recpie-modal--container {
-  width: 750px;
-  height: -moz-fit-content;
-  height: fit-content;
-  max-height: 90%;
-  min-height: 500px;
-  padding: 0;
-  margin: 0;
+/* #region recipe modal */
+#recipe-modal--container {
   background-color: rgb(240, 240, 240);
   border: solid black 1px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
 }
-#recpie-modal--container #recipe--ingredients {
+#recipe-modal--container #recipe--ingredients {
   grid-row: 1;
   grid-column: 1;
 }
-#recpie-modal--container #recipe--about {
-  height: 1fr;
-  width: -moz-fit-content;
-  width: fit-content;
-  grid-row: 2;
-  grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#recpie-modal--container #recipe--about li {
+#recipe-modal--container #recipe--about ul li {
   width: -moz-fit-content;
   width: fit-content;
   white-space: nowrap;
   line-height: 30px;
   margin: 0;
 }
-#recpie-modal--container #recipe--about img {
+#recipe-modal--container #recipe--about img {
   width: calc(100% - 150px);
   height: auto;
   aspect-ratio: 1;
-  margin: 0;
+  margin: 10px 0;
   border: solid black 1px;
 }
-#recpie-modal--container header {
-  width: 100%;
-  padding: 0 75px;
-  margin-bottom: 35px;
-}
-#recpie-modal--container header h1 {
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: "Lulo Bold";
-  white-space: nowrap;
-}
-#recpie-modal--container h2 {
+
+#recipe-modal--container h2 {
   background-color: black;
   color: white;
   font-family: "Lulo";
@@ -319,20 +222,20 @@ input[type=text]:hover {
   font-size: 22px;
   text-align: center;
   align-self: center;
-  margin: 0 65px;
+  margin: 0 65px 10px 65px;
 }
-#recpie-modal--container p {
+#recipe-modal--container p {
   width: 100%;
   padding: 0 75px;
   text-align: left;
   line-height: 2em;
   font-size: 14px;
 }
-#recpie-modal--container ul {
+#recipe-modal--container ul {
   width: 100%;
   padding: 0;
 }
-#recpie-modal--container li {
+#recipe-modal--container li {
   width: 100%;
   padding: 0 75px;
   display: flex;
@@ -342,12 +245,8 @@ input[type=text]:hover {
   margin-bottom: 10px;
   text-align: left;
 }
-#recpie-modal--container li span {
+#recipe-modal--container li span {
   padding: 0;
   margin: 0;
 }
-#recpie-modal--container #recipe--close-btn {
-  width: calc(100% - 150px);
-  padding: 10px 0;
-  margin-bottom: 25px;
-}/*# sourceMappingURL=style.css.map */
+/* #endregion */
