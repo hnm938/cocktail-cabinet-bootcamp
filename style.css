@@ -273,3 +273,11 @@ input[type=text]:hover {
 .suggestions-list li:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.map-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url(./assets/maps-and-flags.png); 
+  background-size: cover;
+  cursor: pointer;
+}

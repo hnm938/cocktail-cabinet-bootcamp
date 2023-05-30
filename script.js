@@ -5,7 +5,7 @@ const favoriteDrinks = [];
 
 //#region Drink Functions
 async function fetchDrink(query) {
-  // queries: s= search by drink name, i= serach by ingredient name, f= search by first letter,
+  // queries: s= search by drink name, i= search by ingredient name, f= search by first letter,
 
   // Fetch from API using drink name
   const res = await fetch(
@@ -16,163 +16,157 @@ async function fetchDrink(query) {
   const drinkList = document.getElementById("drink-list");
   const drinkIngredients = [];
 
-  // console.log(drinkIngredients);
-  // return;
+  // Clear the drink list container
+  drinkList.innerHTML = '';
 
   // literate through drinks, appending each one as a list item
-  /* 
-  !! HTML is directly being set inline instead of appending a new element
-  !! this not only results cleaner code but also
-  !! prevents being able to re-appened any HTML to the container
-  */
+  for (const drink of drinks) {
+    //#region Gather drink ingredients
+    if (drink.strIngredient1) {
+      drinkIngredients.push(drink.strIngredient1);
+    }
+    if (drink.strIngredient2) {
+      drinkIngredients.push(drink.strIngredient2);
+    }
+    if (drink.strIngredient3) {
+      drinkIngredients.push(drink.strIngredient3);
+    }
+    if (drink.strIngredient4) {
+      drinkIngredients.push(drink.strIngredient4);
+    }
+    if (drink.strIngredient5) {
+      drinkIngredients.push(drink.strIngredient5);
+    }
+    if (drink.strIngredient6) {
+      drinkIngredients.push(drink.strIngredient6);
+    }
+    if (drink.strIngredient7) {
+      drinkIngredients.push(drink.strIngredient7);
+    }
+    if (drink.strIngredient8) {
+      drinkIngredients.push(drink.strIngredient8);
+    }
+    if (drink.strIngredient9) {
+      drinkIngredients.push(drink.strIngredient9);
+    }
+    if (drink.strIngredient10) {
+      drinkIngredients.push(drink.strIngredient10);
+    }
+    if (drink.strIngredient11) {
+      drinkIngredients.push(drink.strIngredient11);
+    }
+    if (drink.strIngredient12) {
+      drinkIngredients.push(drink.strIngredient12);
+    }
+    if (drink.strIngredient13) {
+      drinkIngredients.push(drink.strIngredient13);
+    }
+    if (drink.strIngredient14) {
+      drinkIngredients.push(drink.strIngredient14);
+    }
+    if (drink.strIngredient15) {
+      drinkIngredients.push(drink.strIngredient15);
+    }
+    //#endregion
 
-   // Clear the drink list container
-  drinkList.innerHTML = drinks
-    .map((drink) => {
-      let drinkIngredients = [];
-      //#region Gather drink ingredients
-      if (drink.strIngredient1) {
-        drinkIngredients.push(drink.strIngredient1);
-      }
-      if (drink.strIngredient2) {
-        drinkIngredients.push(drink.strIngredient2);
-      }
-      if (drink.strIngredient3) {
-        drinkIngredients.push(drink.strIngredient3);
-      }
-      if (drink.strIngredient4) {
-        drinkIngredients.push(drink.strIngredient4);
-      }
-      if (drink.strIngredient5) {
-        drinkIngredients.push(drink.strIngredient5);
-      }
-      if (drink.strIngredient6) {
-        drinkIngredients.push(drink.strIngredient6);
-      }
-      if (drink.strIngredient7) {
-        drinkIngredients.push(drink.strIngredient7);
-      }
-      if (drink.strIngredient8) {
-        drinkIngredients.push(drink.strIngredient8);
-      }
-      if (drink.strIngredient9) {
-        drinkIngredients.push(drink.strIngredient9);
-      }
-      if (drink.strIngredient10) {
-        drinkIngredients.push(drink.strIngredient10);
-      }
-      if (drink.strIngredient11) {
-        drinkIngredients.push(drink.strIngredient11);
-      }
-      if (drink.strIngredient12) {
-        drinkIngredients.push(drink.strIngredient12);
-      }
-      if (drink.strIngredient13) {
-        drinkIngredients.push(drink.strIngredient13);
-      }
-      if (drink.strIngredient14) {
-        drinkIngredients.push(drink.strIngredient14);
-      }
-      if (drink.strIngredient15) {
-        drinkIngredients.push(drink.strIngredient15);
-      }
-      //#endregion
+    let drinkMeasurements = [];
+    //#region Gather drink measurements
+    if (drink.strMeasure1) {
+      drinkMeasurements.push(drink.strMeasure1);
+    }
+    if (drink.strMeasure2) {
+      drinkMeasurements.push(drink.strMeasure2);
+    }
+    if (drink.strMeasure3) {
+      drinkMeasurements.push(drink.strMeasure3);
+    }
+    if (drink.strMeasure4) {
+      drinkMeasurements.push(drink.strMeasure4);
+    }
+    if (drink.strMeasure5) {
+      drinkMeasurements.push(drink.strMeasure5);
+    }
+    if (drink.strMeasure6) {
+      drinkMeasurements.push(drink.strMeasure6);
+    }
+    if (drink.strMeasure7) {
+      drinkMeasurements.push(drink.strMeasure7);
+    }
+    if (drink.strMeasure8) {
+      drinkMeasurements.push(drink.strMeasure8);
+    }
+    if (drink.strMeasure9) {
+      drinkMeasurements.push(drink.strMeasure9);
+    }
+    if (drink.strMeasure10) {
+      drinkMeasurements.push(drink.strMeasure10);
+    }
+    if (drink.strMeasure11) {
+      drinkMeasurements.push(drink.strMeasure11);
+    }
+    if (drink.strMeasure12) {
+      drinkMeasurements.push(drink.strMeasure12);
+    }
+    if (drink.strMeasure13) {
+      drinkMeasurements.push(drink.strMeasure13);
+    }
+    if (drink.strMeasure14) {
+      drinkMeasurements.push(drink.strMeasure14);
+    }
+    if (drink.strMeasure15) {
+      drinkMeasurements.push(drink.strMeasure15);
+    }
+    //#endregion
 
-      let drinkMeasurements = [];
-      //#region Gather drink measurements
-      if (drink.strMeasure1) {
-        drinkMeasurements.push(drink.strMeasure1);
-      }
-      if (drink.strMeasure2) {
-        drinkMeasurements.push(drink.strMeasure2);
-      }
-      if (drink.strMeasure3) {
-        drinkMeasurements.push(drink.strMeasure3);
-      }
-      if (drink.strMeasure4) {
-        drinkMeasurements.push(drink.strMeasure4);
-      }
-      if (drink.strMeasure5) {
-        drinkMeasurements.push(drink.strMeasure5);
-      }
-      if (drink.strMeasure6) {
-        drinkMeasurements.push(drink.strMeasure6);
-      }
-      if (drink.strMeasure7) {
-        drinkMeasurements.push(drink.strMeasure7);
-      }
-      if (drink.strMeasure8) {
-        drinkMeasurements.push(drink.strMeasure8);
-      }
-      if (drink.strMeasure9) {
-        drinkMeasurements.push(drink.strMeasure9);
-      }
-      if (drink.strMeasure10) {
-        drinkMeasurements.push(drink.strMeasure10);
-      }
-      if (drink.strMeasure11) {
-        drinkMeasurements.push(drink.strMeasure11);
-      }
-      if (drink.strMeasure12) {
-        drinkMeasurements.push(drink.strMeasure12);
-      }
-      if (drink.strMeasure13) {
-        drinkMeasurements.push(drink.strMeasure13);
-      }
-      if (drink.strMeasure14) {
-        drinkMeasurements.push(drink.strMeasure14);
-      }
-      if (drink.strMeasure15) {
-        drinkMeasurements.push(drink.strMeasure15);
-      }
-      //#endregion
-
-      return `
-        <li>
-          <div class="drink-list--drink">
-            <div class="flex flex-row gap-x-[50px]">
-              <img src="${drink.strDrinkThumb}" alt="drink thumbnail">
-              <div>
-                <h1 class="drink-name">${drink.strDrink}</h1>
-                <ul class="drink-ingredients">
-                  <h2>Ingredients</h2>
-                  ${drinkIngredients
-                    .map((ingredient) => `<li>${ingredient}</li>`)
-                    .join("")}
-                </ul>
-              </div>
-            </div>
-            ${
-              drink.strVideo != null
-                ? `
-                <div>
-                  <h3>Drink Video</h3>
-                  <iframe src="https://www.youtube.com/embed/${
-                    drink.strVideo.split("v=")[1]
-                  }" allowfullscreen></iframe>
-                </div>
-                `
-                : ""
-            }
-            <button class="recipe-button" onclick="showRecipe(
-              '${drink.strInstructions}', 
-              '${drinkIngredients}',
-              '${drinkMeasurements}',
-              '${drink.strDrink}', 
-              '${drink.strAlcoholic}',
-              '${drink.strCategory}',
-              '${drink.strGlass}',
-              '${drink.strDrinkThumb}'
-            )"
-            >I want this!</button>
+    // Create a new drink element
+    const drinkElement = document.createElement("li");
+    drinkElement.innerHTML = `
+      <div class="drink-list--drink">
+        <div class="flex flex-row gap-x-[50px]">
+          <img src="${drink.strDrinkThumb}" alt="drink thumbnail">
+          <div>
+            <h1 class="drink-name">${drink.strDrink}</h1>
+            <ul class="drink-ingredients">
+              <h2>Ingredients</h2>
+              ${drinkIngredients
+                .map((ingredient) => `<li>${ingredient}</li>`)
+                .join("")}
+            </ul>
           </div>
-        </li>
-        <div class="list-splitter">
-          <img src="./assets/wooden-floor-isolate-png.png" alt="list item splitter hanging shelf"/>
         </div>
-      `;
-    })
-    .join("");
+        ${
+          drink.strVideo != null
+            ? `
+          <div>
+            <h3>Drink Video</h3>
+            <iframe src="https://www.youtube.com/embed/${
+              drink.strVideo.split("v=")[1]
+            }" allowfullscreen></iframe>
+          </div>
+          `
+            : ""
+        }
+        <div class="map-icon" onclick="showMap('${drink.strDrink}');"></div>
+        <button class="recipe-button" onclick="showRecipe(
+          '${drink.strInstructions}', 
+          '${drinkIngredients}',
+          '${drinkMeasurements}',
+          '${drink.strDrink}', 
+          '${drink.strAlcoholic}',
+          '${drink.strCategory}',
+          '${drink.strGlass}',
+          '${drink.strDrinkThumb}'
+        )"
+        >I want this!</button>
+      </div>
+      <div class="list-splitter">
+        <img src="./assets/wooden-floor-isolate-png.png" alt="list item splitter hanging shelf"/>
+      </div>
+    `;
+
+    // Append the drink element to the drink list
+    drinkList.appendChild(drinkElement);
+  }
 }
 //#endregion
 
@@ -192,20 +186,17 @@ function showRecipe(
   const drinkIngredients = document.getElementById("recipe--drink-ingredients");
 
   // Split the ingredients and measurements into arrays
-
   ingredients = ingredients.split(",");
   measurements = measurements.split(",");
 
-// Combine the ingredients and measurements into formatted strings
-
+  // Combine the ingredients and measurements into formatted strings
   for (let ingredient in ingredients) {
     ingredients[ingredient] = `<span style="font-family: 'Lulo Bold'">${
       measurements[ingredient] == undefined ? "" : measurements[ingredient]
     }</span> ${ingredients[ingredient]}`;
   }
 
-// Show the modal
-
+  // Show the modal
   modal.showModal();
 
   // Set drink name header
@@ -228,8 +219,56 @@ function showRecipe(
   `;
 }
 
-// Function to initialize the page
+// Function to show the map for a drink
+function showMap(drinkName) {
+  const mapModal = document.getElementById("map-modal");
+  const mapContainer = document.getElementById("map-container");
 
+  // Show the modal
+  mapModal.showModal();
+
+  // Display the drink name on the map
+  mapContainer.innerHTML = `
+    <h2>${drinkName}</h2>
+    <div id="map"></div>
+  `;
+
+  // Retrieve the location coordinates for the drink
+  const coordinates = getCoordinates(drinkName);
+
+  // Initialize the map
+  initMap(coordinates);
+}
+
+// Function to retrieve the location coordinates for a drink
+function getCoordinates(drinkName) {
+  // Replace this with your own logic to fetch coordinates from an API or database
+  // For demonstration purposes, a static coordinates object is returned based on the drink name
+  const coordinates = {
+    lat: 37.7749,
+    lng: -122.4194,
+  };
+
+  return coordinates;
+}
+
+// Function to initialize the map
+function initMap(coordinates) {
+  // Create a new map centered at the specified coordinates
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: coordinates,
+    zoom: 12,
+  });
+
+  // Create a marker at the specified coordinates
+  const marker = new google.maps.Marker({
+    position: coordinates,
+    map: map,
+    title: "Drink Location",
+  });
+}
+
+// Function to initialize the page
 async function init() {
   // Set drink start letter categories
   const drinkLetters = document.getElementById("drink-letters-category");
@@ -245,7 +284,6 @@ async function init() {
 }
 
 // When the window loads, initialize the page and fetch drinks with the 'gin' query
-
 window.onload = () => {
   init();
   fetchDrink("s=gin");
