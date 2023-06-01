@@ -14,6 +14,7 @@
   font-family: "Lulo Outline Bold";
   src: url("./assets/Lulo OutlineBold.otf");
 }
+
 * {
   box-sizing: border-box;
 }
@@ -25,6 +26,7 @@ body {
   background-color: rgb(250, 250, 250);
   background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
 }
+
 body h1,
 body h2,
 body h3,
@@ -41,6 +43,7 @@ header {
   justify-content: center;
   color: white;
 }
+
 header h1 {
   font-size: 50px;
   font-family: "Lulo Outline Bold";
@@ -55,6 +58,7 @@ input[type=text] {
   cursor: pointer;
   transition: background-color 150ms ease;
 }
+
 button:hover,
 input[type=text]:hover {
   background-color: rgba(245, 245, 245, 0.1);
@@ -65,7 +69,10 @@ input[type=text]:hover {
   font-family: "Lulo Bold";
   border-bottom: solid black 2px;
 }
-#drink-search-container input[type=text] { font-family: "Lulo Bold"; }
+
+#drink-search-container input[type=text] {
+  font-family: "Lulo Bold";
+}
 /* #endregion */
 
 /* #region drink-letters-category */
@@ -77,7 +84,10 @@ input[type=text]:hover {
   cursor: pointer;
   transition: all 350ms ease;
 }
-#drink-letters-category button:hover { color: gray; }
+
+#drink-letters-category button:hover {
+  color: gray;
+}
 /* #endregion */
 
 /* #region drink-list */
@@ -87,6 +97,7 @@ input[type=text]:hover {
   margin: 0 0 10px 0;
   transform: translateX(-20px);
 }
+
 #drink-list hr {
   margin: 50px 0;
 }
@@ -105,12 +116,14 @@ input[type=text]:hover {
   justify-content: center;
   gap: 25px 0;
 }
+
 #drink-list .drink-list--drink h1,
 #drink-list .drink-list--drink h2,
 #drink-list .drink-list--drink h3 {
   padding: 0 150px 5px 150px;
   font-weight: 300;
 }
+
 #drink-list .drink-list--drink h1 {
   transform: translateX(-45px);
   font-weight: 400;
@@ -118,12 +131,14 @@ input[type=text]:hover {
   text-align: left;
   max-width: 400px;
 }
+
 #drink-list .drink-list--drink img {
   width: auto;
   height: 250px;
   aspect-ratio: 1;
   box-shadow: -3px 3px 5px 0 rgba(0, 0, 0, 0.7);
 }
+
 #drink-list .drink-list--drink h3 {
   text-align: center;
   border: solid black 2px;
@@ -132,22 +147,26 @@ input[type=text]:hover {
   font-size: 25px;
   font-family: "Lulo Bold";
 }
+
 #drink-list .drink-list--drink iframe {
   margin-top: 10px;
   width: 600px;
   aspect-ratio: 2;
   border: solid black 2px;
 }
+
 #drink-list .drink-list--drink .drink-name {
   border: none;
   margin: 0 25px;
   padding: 0;
   font-family: "Lulo Bold";
 }
+
 #drink-list .drink-list--drink .drink-ingredients {
   margin: 5px 0;
   line-height: 30px;
 }
+
 #drink-list .drink-list--drink .drink-ingredients h2 {
   font-family: "Lulo Outline Bold";
   border: solid black 2px;
@@ -167,6 +186,7 @@ input[type=text]:hover {
   justify-content: center;
   z-index: -9999;
 }
+
 #drink-list .list-splitter img {
   transform: scaleY(0.45) translateY(-10px);
   height: 200px;
@@ -184,6 +204,7 @@ input[type=text]:hover {
   box-shadow: -5px 10px 10px 0 rgba(0, 0, 0, 0.5);
   transition: filter 150ms ease;
 }
+
 #drink-list .recipe-button:hover {
   opacity: 1;
   filter: brightness(0.9);
@@ -195,10 +216,12 @@ input[type=text]:hover {
   background-color: rgb(240, 240, 240);
   border: solid black 1px;
 }
+
 #recipe-modal--container #recipe--ingredients {
   grid-row: 1;
   grid-column: 1;
 }
+
 #recipe-modal--container #recipe--about ul li {
   width: -moz-fit-content;
   width: fit-content;
@@ -206,6 +229,7 @@ input[type=text]:hover {
   line-height: 30px;
   margin: 0;
 }
+
 #recipe-modal--container #recipe--about img {
   width: calc(100% - 150px);
   height: auto;
@@ -224,6 +248,7 @@ input[type=text]:hover {
   align-self: center;
   margin: 0 65px 10px 65px;
 }
+
 #recipe-modal--container p {
   width: 100%;
   padding: 0 75px;
@@ -231,10 +256,12 @@ input[type=text]:hover {
   line-height: 2em;
   font-size: 14px;
 }
+
 #recipe-modal--container ul {
   width: 100%;
   padding: 0;
 }
+
 #recipe-modal--container li {
   width: 100%;
   padding: 0 75px;
@@ -245,11 +272,14 @@ input[type=text]:hover {
   margin-bottom: 10px;
   text-align: left;
 }
+
 #recipe-modal--container li span {
   padding: 0;
   margin: 0;
 }
-/* #endregion //////////////////////////////*/
+/* #endregion */
+
+/* #region suggestions-list */
 .suggestions-list {
   position: absolute;
   top: 100%;
@@ -261,7 +291,7 @@ input[type=text]:hover {
   padding: 0;
   margin: 0;
   display: none;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .suggestions-list li {
@@ -271,12 +301,4 @@ input[type=text]:hover {
 
 .suggestions-list li:hover {
   background-color: rgba(0, 0, 0, 0.1);
-}
-
-.map-icon {
-  width: 24px;
-  height: 24px;
-  background-image: url(./assets/maps-and-flags.png); 
-  background-size: cover;
-  cursor: pointer;
 }

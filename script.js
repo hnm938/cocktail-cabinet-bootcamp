@@ -1,176 +1,99 @@
-// Get the container for the drink list
+// Retrieve the DOM element for the drink list container
 const drinkListContainer = document.getElementById("drink-list-container");
-// Array to store favorite drinks
+
+// An array to store favorite drinks
 const favoriteDrinks = [];
 
-//#region Drink Functions
+// Asynchronous function to fetch drink data from the API based on the given query
 async function fetchDrink(query) {
-  // queries: s= search by drink name, i= search by ingredient name, f= search by first letter,
+  // Make a fetch request to the API endpoint with the query parameter
+  const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?${query}`);
 
-  // Fetch from API using drink name
-  const res = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/search.php?${query}`
-  );
-  const drinks = (await res.json()).drinks; // get drinks from data query
+  // Extract the 'drinks' array from the API response
+  const { drinks } = await res.json();
 
+  // Retrieve the DOM element for the drink list
   const drinkList = document.getElementById("drink-list");
-  const drinkIngredients = [];
 
-  // Clear the drink list container
-  drinkList.innerHTML = '';
+  // Clear the drink list container before appending new drinks
+  drinkList.innerHTML = "";
 
-  // literate through drinks, appending each one as a list item
-  for (const drink of drinks) {
-    //#region Gather drink ingredients
-    if (drink.strIngredient1) {
-      drinkIngredients.push(drink.strIngredient1);
-    }
-    if (drink.strIngredient2) {
-      drinkIngredients.push(drink.strIngredient2);
-    }
-    if (drink.strIngredient3) {
-      drinkIngredients.push(drink.strIngredient3);
-    }
-    if (drink.strIngredient4) {
-      drinkIngredients.push(drink.strIngredient4);
-    }
-    if (drink.strIngredient5) {
-      drinkIngredients.push(drink.strIngredient5);
-    }
-    if (drink.strIngredient6) {
-      drinkIngredients.push(drink.strIngredient6);
-    }
-    if (drink.strIngredient7) {
-      drinkIngredients.push(drink.strIngredient7);
-    }
-    if (drink.strIngredient8) {
-      drinkIngredients.push(drink.strIngredient8);
-    }
-    if (drink.strIngredient9) {
-      drinkIngredients.push(drink.strIngredient9);
-    }
-    if (drink.strIngredient10) {
-      drinkIngredients.push(drink.strIngredient10);
-    }
-    if (drink.strIngredient11) {
-      drinkIngredients.push(drink.strIngredient11);
-    }
-    if (drink.strIngredient12) {
-      drinkIngredients.push(drink.strIngredient12);
-    }
-    if (drink.strIngredient13) {
-      drinkIngredients.push(drink.strIngredient13);
-    }
-    if (drink.strIngredient14) {
-      drinkIngredients.push(drink.strIngredient14);
-    }
-    if (drink.strIngredient15) {
-      drinkIngredients.push(drink.strIngredient15);
-    }
-    //#endregion
+  // Loop through each drink in the 'drinks' array
+  drinks.forEach((drink) => {
+    // Arrays to store the drink's ingredients and measurements
+    const drinkIngredients = [];
+    const drinkMeasurements = [];
 
-    let drinkMeasurements = [];
-    //#region Gather drink measurements
-    if (drink.strMeasure1) {
-      drinkMeasurements.push(drink.strMeasure1);
-    }
-    if (drink.strMeasure2) {
-      drinkMeasurements.push(drink.strMeasure2);
-    }
-    if (drink.strMeasure3) {
-      drinkMeasurements.push(drink.strMeasure3);
-    }
-    if (drink.strMeasure4) {
-      drinkMeasurements.push(drink.strMeasure4);
-    }
-    if (drink.strMeasure5) {
-      drinkMeasurements.push(drink.strMeasure5);
-    }
-    if (drink.strMeasure6) {
-      drinkMeasurements.push(drink.strMeasure6);
-    }
-    if (drink.strMeasure7) {
-      drinkMeasurements.push(drink.strMeasure7);
-    }
-    if (drink.strMeasure8) {
-      drinkMeasurements.push(drink.strMeasure8);
-    }
-    if (drink.strMeasure9) {
-      drinkMeasurements.push(drink.strMeasure9);
-    }
-    if (drink.strMeasure10) {
-      drinkMeasurements.push(drink.strMeasure10);
-    }
-    if (drink.strMeasure11) {
-      drinkMeasurements.push(drink.strMeasure11);
-    }
-    if (drink.strMeasure12) {
-      drinkMeasurements.push(drink.strMeasure12);
-    }
-    if (drink.strMeasure13) {
-      drinkMeasurements.push(drink.strMeasure13);
-    }
-    if (drink.strMeasure14) {
-      drinkMeasurements.push(drink.strMeasure14);
-    }
-    if (drink.strMeasure15) {
-      drinkMeasurements.push(drink.strMeasure15);
-    }
-    //#endregion
+    // Loop through the drink's ingredients and measurements using the 'strIngredient' and 'strMeasure' properties
+    for (let i = 1; i <= 15; i++) {
+      // Retrieve the ingredient and measurement values using dynamic property access
+      const ingredient = drink[`strIngredient${i}`];
+      const measurement = drink[`strMeasure${i}`];
 
-    // Create a new drink element
-    const drinkElement = document.createElement("li");
-    drinkElement.innerHTML = `
-      <div class="drink-list--drink">
-        <div class="flex flex-row gap-x-[50px]">
-          <img src="${drink.strDrinkThumb}" alt="drink thumbnail">
-          <div>
-            <h1 class="drink-name">${drink.strDrink}</h1>
-            <ul class="drink-ingredients">
-              <h2>Ingredients</h2>
-              ${drinkIngredients
-                .map((ingredient) => `<li>${ingredient}</li>`)
-                .join("")}
-            </ul>
-          </div>
+      // Check if the ingredient exists and is not an empty string
+      if (ingredient && ingredient.trim() !== "") {
+        // Add the ingredient to the drinkIngredients array
+        drinkIngredients.push(ingredient);
+      }
+
+      // Check if the measurement exists and is not an empty string
+      if (measurement && measurement.trim() !== "") {
+        // Add the measurement to the drinkMeasurements array
+        drinkMeasurements.push(measurement);
+      }
+    }
+
+    // Create a string of HTML for the drink's ingredients using the drinkIngredients array
+    const ingredientsHTML = drinkIngredients.map((ingredient) => `<li>${ingredient}</li>`).join("");
+
+    // Create a string of HTML for the drink's video, if available
+    const videoHTML = drink.strVideo
+      ? `
+        <div>
+          <h3>Drink Video</h3>
+          <iframe src="https://www.youtube.com/embed/${drink.strVideo.split("v=")[1]}" allowfullscreen></iframe>
         </div>
-        ${
-          drink.strVideo != null
-            ? `
-          <div>
-            <h3>Drink Video</h3>
-            <iframe src="https://www.youtube.com/embed/${
-              drink.strVideo.split("v=")[1]
-            }" allowfullscreen></iframe>
+      `
+      : "";
+
+    // Create a string of HTML for the entire drink using the retrieved properties and generated HTML
+    const drinkHTML = `
+      <li>
+        <div class="drink-list--drink">
+          <div class="flex flex-row gap-x-[50px]">
+            <img src="${drink.strDrinkThumb}" alt="drink thumbnail">
+            <div>
+              <h1 class="drink-name">${drink.strDrink}</h1>
+              <ul class="drink-ingredients">
+                <h2>Ingredients</h2>
+                ${ingredientsHTML}
+              </ul>
+            </div>
           </div>
-          `
-            : ""
-        }
-        <div class="map-icon" onclick="showMap('${drink.strDrink}');"></div>
-        <button class="recipe-button" onclick="showRecipe(
-          '${drink.strInstructions}', 
-          '${drinkIngredients}',
-          '${drinkMeasurements}',
-          '${drink.strDrink}', 
-          '${drink.strAlcoholic}',
-          '${drink.strCategory}',
-          '${drink.strGlass}',
-          '${drink.strDrinkThumb}'
-        )"
-        >I want this!</button>
-      </div>
+          ${videoHTML}
+          <button class="recipe-button" onclick="showRecipe(
+            '${drink.strInstructions}', 
+            '${drinkIngredients}',
+            '${drinkMeasurements}',
+            '${drink.strDrink}', 
+            '${drink.strAlcoholic}',
+            '${drink.strCategory}',
+            '${drink.strGlass}',
+            '${drink.strDrinkThumb}'
+          )">I want this!</button>
+        </div>
+      </li>
       <div class="list-splitter">
         <img src="./assets/wooden-floor-isolate-png.png" alt="list item splitter hanging shelf"/>
       </div>
     `;
 
-    // Append the drink element to the drink list
-    drinkList.appendChild(drinkElement);
-  }
+    // Append the drink's HTML to the drink list
+    drinkList.innerHTML += drinkHTML;
+  });
 }
-//#endregion
 
-// Function to show the recipe for a drink
+// Function to display the recipe details for a drink
 function showRecipe(
   instructions,
   ingredients,
@@ -181,36 +104,33 @@ function showRecipe(
   glassType,
   thumbnail
 ) {
+  // Retrieve the recipe modal and drink information container
   const modal = document.getElementById("recipe-modal");
   const drinkInfo = document.getElementById("recipe--drink-info");
   const drinkIngredients = document.getElementById("recipe--drink-ingredients");
 
-  // Split the ingredients and measurements into arrays
+  // Split the ingredients and measurements strings into arrays
   ingredients = ingredients.split(",");
   measurements = measurements.split(",");
 
-  // Combine the ingredients and measurements into formatted strings
-  for (let ingredient in ingredients) {
-    ingredients[ingredient] = `<span style="font-family: 'Lulo Bold'">${
-      measurements[ingredient] == undefined ? "" : measurements[ingredient]
-    }</span> ${ingredients[ingredient]}`;
+  // Format the ingredients array with measurements and HTML styling
+  for (let i = 0; i < ingredients.length; i++) {
+    ingredients[i] = `<span style="font-family: 'Lulo Bold'">${measurements[i] || ""}</span> ${ingredients[i]}`;
   }
 
-  // Show the modal
+  // Show the recipe modal
   modal.showModal();
 
-  // Set drink name header
+  // Set the content of various elements in the modal with the drink details
   modal.querySelector("#recipe--drink-name").innerHTML = drinkName;
   modal.querySelector("#recipe--instructions").innerHTML = instructions;
   modal.querySelector("#recipe--glass-type").innerHTML = `Glass: ${glassType}`;
   modal.querySelector("#recipe--drink-thumb").src = thumbnail;
 
-  // Set drink ingredients
-  drinkIngredients.innerHTML = `${ingredients
-    .map((ingredient) => `<li>${ingredient}</li>`)
-    .join("")}`;
+  // Create a string of HTML for the drink's ingredients using the formatted ingredients array
+  drinkIngredients.innerHTML = ingredients.map((ingredient) => `<li>${ingredient}</li>`).join("");
 
-  // Set drink info
+  // Set the content of the drink information list in the modal
   drinkInfo.innerHTML = `
     <li>${isAlcoholic}</li>
     <li>${drinkCategory}</li>
@@ -219,71 +139,22 @@ function showRecipe(
   `;
 }
 
-// Function to show the map for a drink
-function showMap(drinkName) {
-  const mapModal = document.getElementById("map-modal");
-  const mapContainer = document.getElementById("map-container");
-
-  // Show the modal
-  mapModal.showModal();
-
-  // Display the drink name on the map
-  mapContainer.innerHTML = `
-    <h2>${drinkName}</h2>
-    <div id="map"></div>
-  `;
-
-  // Retrieve the location coordinates for the drink
-  const coordinates = getCoordinates(drinkName);
-
-  // Initialize the map
-  initMap(coordinates);
-}
-
-// Function to retrieve the location coordinates for a drink
-function getCoordinates(drinkName) {
-  // Replace this with your own logic to fetch coordinates from an API or database
-  // For demonstration purposes, a static coordinates object is returned based on the drink name
-  const coordinates = {
-    lat: 37.7749,
-    lng: -122.4194,
-  };
-
-  return coordinates;
-}
-
-// Function to initialize the map
-function initMap(coordinates) {
-  // Create a new map centered at the specified coordinates
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: coordinates,
-    zoom: 12,
-  });
-
-  // Create a marker at the specified coordinates
-  const marker = new google.maps.Marker({
-    position: coordinates,
-    map: map,
-    title: "Drink Location",
-  });
-}
-
 // Function to initialize the page
 async function init() {
-  // Set drink start letter categories
+  // Retrieve the DOM element for the drink letters category
   const drinkLetters = document.getElementById("drink-letters-category");
+
+  // Define the alphabet
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  // Generate buttons for each letter of the alphabet and attach event listeners
   drinkLetters.innerHTML = alphabet
     .split("")
-    .map(
-      (letter) => `
-    <button onclick="fetchDrink('f=${letter}')">${letter}</button>
-  `
-    )
+    .map((letter) => `<button onclick="fetchDrink('f=${letter}')">${letter}</button>`)
     .join("");
 }
 
-// When the window loads, initialize the page and fetch drinks with the 'gin' query
+// Call the 'init' function when the window has finished loading
 window.onload = () => {
   init();
   fetchDrink("s=gin");
