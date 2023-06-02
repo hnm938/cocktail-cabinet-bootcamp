@@ -8,9 +8,29 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <link rel="icon" type="image/x-icon" href="./assets/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7vtmRpQHeGK_fGuUO1znwJ-lB0EFnLFE"></script>
+    <script src="https://kit.fontawesome.com/b3cad2a71b.js" crossorigin="anonymous"></script>
     <title>Cocktail Cabinet</title>
   </head>
   <body>
+    <aside class="side-panel w-fit h-fit mr-[25px]">
+      <button class="map-button z-100" onclick="showMap(this, this.nextElementSibling)">
+        <i class="fa-sharp fa-solid fa-location-dot"></i>
+        <p>Bar's Near You</p>
+      </button>
+      <div class="map-container">
+        <div id="map" class="w-full h-full"></div>
+        <!-- !! MAP COMMENTED OUT FOR TESTING -->
+        <!-- !! ENABLE WHEN APP IS FINISHED -->
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7vtmRpQHeGK_fGuUO1znwJ-lB0EFnLFE&libraries=places&callback=initMap"></script> -->
+      </div>
+      <button onclick="window.location = './favorites.html'">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      <button onclick="window.open('./favorites.html')">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </button>
+    </aside>
     <header>
       <h1>Cocktail Cabinet</h1>
     </header>
@@ -58,10 +78,9 @@
         </button>
 
         <button
-        class="min-w-1/10 p-[10px]"
+        class="min-w-1/10 p-[10px] z-[-1]"
         onclick="window.location.href = 'favorites.html'"
       >
-
         Favorites ❤️‍🔥
       </button>
       </div>
@@ -134,7 +153,6 @@
     </button>
   </div>
 </dialog>
- 
 </body>
 
 </html>
