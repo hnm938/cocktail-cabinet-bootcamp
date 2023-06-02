@@ -1,45 +1,3 @@
-function updateSuggestions(searchTerm) {
-  const suggestionsList = document.getElementById("suggestions-list");
-  const searchInput = document.getElementById("drink-search");
-
-  if (searchTerm.length > 0) {
-    fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const drinks = data.drinks;
-        suggestionsList.innerHTML = "";
-
-        if (drinks) {
-          for (let i = 0; i < drinks.length && i < 5; i++) {
-            const drinkName = drinks[i].strDrink;
-            const li = document.createElement("li");
-            li.textContent = drinkName;
-            li.onclick = function () {
-              searchInput.value = drinkName;
-              suggestionsList.style.display = "none";
-            };
-            suggestionsList.appendChild(li);
-          }
-        }
-
-        if (drinks && drinks.length > 0) {
-          suggestionsList.style.display = "block";
-        } else {
-          suggestionsList.style.display = "none";
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        suggestionsList.style.display = "none";
-      });
-  } else {
-    suggestionsList.innerHTML = "";
-    suggestionsList.style.display = "none";
-  }
-}
-
 // Event listener to hide the dropdown menu when clicking outside
 window.addEventListener("click", function (event) {
   const suggestionsList = document.getElementById("suggestions-list");
@@ -53,6 +11,99 @@ window.addEventListener("click", function (event) {
     suggestionsList.style.display = "none";
   }
 });
+
+
+// #region Map Functions
+var map;
+// Function to create the map
+function initMap() {
+  // Check if the browser supports Geolocation
+  if (navigator.geolocation) {
+    // Get the current position
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        var currentLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: currentLocation,
+          zoom: 12,
+        });
+
+        var request = {
+          location: currentLocation,
+          radius: "4000",
+          type: ["bar"],
+        };
+
+        var service = new google.maps.places.PlacesService(map);
+
+        service.nearbySearch(request, function (results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+              createMarker(results[i], map);
+            }
+          }
+        });
+
+        // Add a marker at the user's current location
+        var marker = new google.maps.Marker({
+          position: currentLocation,
+          map: map,
+          title: "Your Location",
+        });
+      },
+      function () {
+        // Handle errors when retrieving the user's location
+        handleLocationError(true);
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false);
+  }
+}
+
+// Error function if user location cannot be found
+function handleLocationError(browserHasGeolocation) {
+  var error = browserHasGeolocation
+    ? "Error: The Geolocation service failed."
+    : "Error: Your browser doesn't support geolocation.";
+  console.error(error);
+  // Display a default map centered at a specific location
+  var defaultLocation = { lat: -34.397, lng: 150.644 };
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: defaultLocation,
+    zoom: 8,
+  });
+}
+
+// Marker function to create bar markers
+function createMarker(place, map) {
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location,
+  });
+
+  google.maps.event.addListener(marker, "click", function () {
+    // Show additional information about the place in an info window
+    var infowindow = new google.maps.InfoWindow();
+    infowindow.setContent(
+      "<strong>" + place.name + "</strong><br>" + place.vicinity
+    );
+    infowindow.open(map, this);
+  });
+}
+
+// Function to show map via CSS
+function showMap(e, map) {
+  map.classList.toggle("active");
+  e.classList.toggle("active");
+  console.log(map);
+}
+// #endregion
 
 // Get the container for the drink list
 const drinkListContainer = document.getElementById("drink-list-container");
@@ -290,6 +341,7 @@ async function init() {
   // Set drink start letter categories
   const drinkLetters = document.getElementById("drink-letters-category");
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
   drinkLetters.innerHTML = alphabet
     .split("")
     .map(
