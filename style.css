@@ -262,15 +262,25 @@ input[type=text]:hover {
 /* #endregion */
 
 /* #region recipe-button */
+#drink-list .recipe-button-container {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0 10px;
+}
 #drink-list .recipe-button {
   margin: 0 0 10px 0;
-  width: 30%;
+  width: 10%;
+  min-width: fit-content;
   padding: 10px 15px;
   font-family: "Lulo";
   background-color: rgb(245, 245, 245);
   box-shadow: -5px 10px 10px 0 rgba(0, 0, 0, 0.5);
   transition: filter 150ms ease;
 }
+#drink-list .recipe-button:nth-of-type(1) { width: 90%; margin-right: 10px; }
 #drink-list .recipe-button:hover {
   opacity: 1;
   filter: brightness(0.9);

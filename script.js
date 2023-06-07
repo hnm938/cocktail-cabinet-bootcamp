@@ -12,7 +12,6 @@ window.addEventListener("click", function (event) {
   }
 });
 
-
 // #region Map Functions
 var map;
 // Function to create the map
@@ -111,14 +110,29 @@ const drinkListContainer = document.getElementById("drink-list-container");
 const favoriteDrinks = [];
 
 //#region Drink Functions
-async function fetchDrink(query) {
+async function fetchDrink(query, usingID, drinkIDs) {
   // queries: s= search by drink name, i= serach by ingredient name, f= search by first letter,
+  let drinks = null;
 
   // Fetch from API using drink name
-  const res = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/search.php?${query}`
-  );
-  const drinks = (await res.json()).drinks; // get drinks from data query
+  let savedDrinks = [];
+  if (usingID) {
+    // Set drinks to an empty array
+    drinks = [];
+    for (drinkID of drinkIDs) {
+      const res = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`
+      );
+      drinks.push((await res.json()).drinks[0]);
+    }
+  } else {
+    const res = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?${query}`
+    );
+    drinks = (await res.json()).drinks; // get drinks from data query
+  }
+
+  console.log(drinks);
 
   const drinkList = document.getElementById("drink-list");
   const drinkIngredients = [];
@@ -261,17 +275,27 @@ async function fetchDrink(query) {
                 `
                 : ""
             }
-            <button class="recipe-button" onclick="showRecipe(
-              '${drink.strInstructions}', 
-              '${drinkIngredients}',
-              '${drinkMeasurements}',
-              '${drink.strDrink}', 
-              '${drink.strAlcoholic}',
-              '${drink.strCategory}',
-              '${drink.strGlass}',
-              '${drink.strDrinkThumb}'
-            )"
-            >I want this!</button>
+            <div class="recipe-button-container">
+              <button class="recipe-button" onclick="showRecipe(
+                  '${drink.strInstructions}', 
+                  '${drinkIngredients}',
+                  '${drinkMeasurements}',
+                  '${drink.strDrink}', 
+                  '${drink.strAlcoholic}',
+                  '${drink.strCategory}',
+                  '${drink.strGlass}',
+                  '${drink.strDrinkThumb}'
+                )"
+              >I want this!</button>
+              <button class="recipe-button rounded-full aspect-square text-[1.25rem]" onclick="saveDrink(${
+                drink.idDrink
+              })">⭐</button>
+              ${
+                window.location.href.includes("favorites") == false
+                  ? ""
+                  : `<button class="recipe-button rounded-full aspect-square text-[1.25rem]" onclick="removeSavedDrink(${drink.idDrink})">🗑️</button>`
+              }
+            </div>
           </div>
         </li>
         <div class="list-splitter">
@@ -282,6 +306,36 @@ async function fetchDrink(query) {
     .join("");
 }
 //#endregion
+
+// Function to save the drink ID to local storage
+async function saveDrink(drinkID) {
+  let savedDrinks = [localStorage.getItem("saved-drinks")];
+  savedDrinks = savedDrinks == null ? [] : savedDrinks;
+
+  // Prevent duplicate saved drinks
+  if (localStorage.getItem("saved-drinks") !== null) {
+    if (localStorage.getItem("saved-drinks").includes(drinkID)) {
+      return;
+    }
+  }
+  savedDrinks.push(drinkID.toString());
+  localStorage.setItem("saved-drinks", savedDrinks);
+  alert("🍸 Drink Added to Favorites 🍹");
+}
+
+function removeSavedDrink(drinkID) {
+  let savedDrinks = localStorage.getItem("saved-drinks").split(",");
+  savedDrinks = savedDrinks.filter((id) => ![`${drinkID}`].includes(id));
+
+  localStorage.setItem("saved-drinks", savedDrinks);
+  window.location.reload();
+}
+
+function loadSavedDrinks() {
+  let savedDrinks = localStorage.getItem("saved-drinks").split(",");
+  savedDrinks.splice(0, 1);
+  fetchDrink("", true, savedDrinks);
+}
 
 // Function to show the recipe for a drink
 function showRecipe(
