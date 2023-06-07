@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Cocktail Cabinet Favorites</title>
   </head>
-  <body>
+  <body onload="loadSavedDrinks()">
     <header>
       <h1>Cocktail Cabinet</h1>
     </header>
@@ -32,9 +32,17 @@
       >Favorites</label>
 
       <button
-      class="min-w-1/10 p-[10px]"
-      onclick="window.location.href = 'index.html'"
-    >
+        class="min-w-1/10 p-[10px] mb-[50px]"
+        onclick="window.location.href = 'index.html'"
+      >
 
-      Back to Search
-    </button>
+        Back to Search
+      </button>
+    </div>
+
+    <!-- Holds all query results as list items -->
+    <div id="drink-list-container">
+      <ul id="drink-list" class="list-none"></ul>
+    </div>
+  </body>
+</html>
