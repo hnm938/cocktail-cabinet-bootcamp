@@ -18,18 +18,55 @@
   box-sizing: border-box;
 }
 
+:root {
+  --background-color: rgb(250, 250, 250);
+  --background-color-dark: rgb(25, 25, 25, 0.8);
+  --theme-change: background-color 1s ease;
+}
+
 body {
   font-family: "Lulo", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: rgb(250, 250, 250);
+  background-color: var(--background-color);
   background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+  transition: var(--theme-change);
 }
+body.dark-mode {
+  background-color: black;
+  color: var(--background-color);
+  border-color: var(--background-color) !important;
+  transition: var(--theme-change);
+}
+
+body.dark-mode iframe {
+  border-color: var(--background-color) !important;
+  transition: var(--theme-change);
+}
+body.dark-mode label {
+  border-color: var(--background-color) !important;
+  transition: var(--theme-change);
+}
+body.dark-mode #title-logo {
+  border-color: var(--background-color) !important;
+}
+body.dark-mode #title-logo img {
+  filter: invert(1);
+}
+
 body h1,
 body h2,
 body h3,
 body h4 {
   margin: 0;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: var(--background-color);
+  border-color: var(--background-color) !important;
 }
 
 header {
@@ -48,22 +85,30 @@ header h1 {
 }
 
 button,
-input[type=text] {
+input[type="text"] {
   border: solid black 2px;
   background-color: rgba(245, 245, 245, 0.7);
   font-family: "Lulo";
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition: filter 150ms ease, var(--theme-change);
+}
+body.dark-mode button,
+body.dark-mode input[type="text"] {
+  background-color: var(--background-color-dark);
+  border-color: var(--background-color);
+  color: var(--background-color);
+  transition: filter 150ms ease, var(--theme-change);
 }
 button:hover,
-input[type=text]:hover {
-  background-color: rgba(245, 245, 245, 0.1);
+input[type="text"]:hover {
+  filter: brightness(0.9);
 }
 
 /* #region other fixed elements */
 .side-panel {
   position: fixed;
-  right: 0; top: 50%;
+  right: 0;
+  top: 50%;
   transform: translateY(-50%);
 
   display: flex;
@@ -86,8 +131,12 @@ input[type=text]:hover {
   opacity: 0.75;
   transition: all 350ms ease;
 }
-.side-panel button:nth-of-type(1) { z-index: 41; }
-.side-panel button:hover { opacity: 1; }
+.side-panel button:nth-of-type(1) {
+  z-index: 41;
+}
+.side-panel button:hover {
+  opacity: 1;
+}
 
 .map-button.active {
   width: 100% !important;
@@ -105,12 +154,12 @@ input[type=text]:hover {
   display: block;
   width: fit-content;
 
-  transition: width 500ms 2s ease; 
+  transition: width 500ms 2s ease;
 }
 .map-button {
   width: 75px !important;
   overflow: hidden;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,11 +170,11 @@ input[type=text]:hover {
 .map-button p {
   display: none;
   width: 0px;
-  
+
   overflow: hidden;
   white-space: nowrap;
 
-  transition: all 500ms 2s ease; 
+  transition: all 500ms 2s ease;
 }
 .map-button i {
   font-size: 30px;
@@ -142,7 +191,8 @@ input[type=text]:hover {
   width: 0px;
   height: 0px;
   border: solid black 0;
-  transition: height 1s ease, width 1s 500ms ease, margin 250ms 1.25s ease, border 1ms 1.4s;
+  transition: height 1s ease, width 1s 500ms ease, margin 250ms 1.25s ease,
+    border 1ms 1.4s;
 }
 
 /* #endregion */
@@ -152,7 +202,9 @@ input[type=text]:hover {
   font-family: "Lulo Bold";
   border-bottom: solid black 2px;
 }
-#drink-search-container input[type=text] { font-family: "Lulo Bold"; }
+#drink-search-container input[type="text"] {
+  font-family: "Lulo Bold";
+}
 /* #endregion */
 
 /* #region drink-letters-category */
@@ -164,7 +216,9 @@ input[type=text]:hover {
   cursor: pointer;
   transition: all 350ms ease;
 }
-#drink-letters-category button:hover { color: gray; }
+#drink-letters-category button:hover {
+  color: gray;
+}
 /* #endregion */
 
 /* #region drink-list */
@@ -270,6 +324,9 @@ input[type=text]:hover {
   justify-content: center;
   gap: 0 10px;
 }
+body.dark-mode #drink-list .recipe-button-container .recipe-button {
+  background-color: var(--background-color-dark);
+}
 #drink-list .recipe-button {
   margin: 0 0 10px 0;
   width: 10%;
@@ -280,7 +337,10 @@ input[type=text]:hover {
   box-shadow: -5px 10px 10px 0 rgba(0, 0, 0, 0.5);
   transition: filter 150ms ease;
 }
-#drink-list .recipe-button:nth-of-type(1) { width: 90%; margin-right: 10px; }
+#drink-list .recipe-button:nth-of-type(1) {
+  width: 90%;
+  margin-right: 10px;
+}
 #drink-list .recipe-button:hover {
   opacity: 1;
   filter: brightness(0.9);
@@ -367,7 +427,7 @@ input[type=text]:hover {
   padding: 0;
   margin: 0;
   display: none;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
