@@ -132,8 +132,6 @@ async function fetchDrink(query, usingID, drinkIDs) {
     drinks = (await res.json()).drinks; // get drinks from data query
   }
 
-  console.log(drinks);
-
   const drinkList = document.getElementById("drink-list");
   const drinkIngredients = [];
 
@@ -390,7 +388,6 @@ function showRecipe(
 }
 
 // Function to initialize the page
-
 async function init() {
   // Set drink start letter categories
   const drinkLetters = document.getElementById("drink-letters-category");
