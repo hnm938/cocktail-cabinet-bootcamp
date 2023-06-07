@@ -49,6 +49,7 @@ body.dark-mode label {
 }
 body.dark-mode #title-logo {
   border-color: var(--background-color) !important;
+  transition: var(--theme-change);
 }
 body.dark-mode #title-logo img {
   filter: invert(1);
