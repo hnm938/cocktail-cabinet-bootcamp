@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/b3cad2a71b.js" crossorigin="anonymous"></script>
     <title>Cocktail Cabinet</title>
   </head>
-  <body>
+  <body class="dark-mode">
     <aside class="side-panel w-fit h-fit mr-[25px]">
       <button class="map-button z-100" onclick="showMap(this, this.nextElementSibling)">
         <i class="fa-sharp fa-solid fa-location-dot"></i>
@@ -27,7 +27,7 @@
       <button onclick="window.location = './favorites.html'">
         <i class="fa-solid fa-star"></i>
       </button>
-      <button onclick="window.open('./favorites.html')">
+      <button onclick="body.classList.toggle('dark-mode')">
         <i class="fa-solid fa-circle-half-stroke"></i>
       </button>
     </aside>
@@ -88,14 +88,14 @@
 
   <!-- Drink Categories -->
   <div id="drink-categories" class="my-[25px] grid grid-rows-2 grid-flow-col gap-y-[5px] gap-x-[10px] lg:w-1/2 lg:mx-auto lg:grid-rows-2 sm:grid-rows-4 sm:w-[90%] sm:mx-auto">
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=coffee')">Caffeinated ☕</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=fruit')">Fruity 🍇</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=fizz')">Fizzy Drinks 🥤</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=milk')">Milk Based 🥛</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=beer')">Beer 🍺</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=wine')">Wine 🍷</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=tea')">Teas 🧋</button>
-    <button class="min-w-[1fr] py-[10px] px-[10px] hover:bg-white" onclick="fetchDrink('s=sex')">🥵</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=coffee')">Caffeinated ☕</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=fruit')">Fruity 🍇</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=fizz')">Fizzy Drinks 🥤</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=milk')">Milk Based 🥛</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=beer')">Beer 🍺</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=wine')">Wine 🍷</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=tea')">Teas 🧋</button>
+    <button class="min-w-[1fr] py-[10px] px-[10px]" onclick="fetchDrink('s=sex')">🥵</button>
   </div>
   <!-- Container for letter category buttons  -->
   <div 
