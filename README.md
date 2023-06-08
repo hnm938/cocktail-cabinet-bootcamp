@@ -1,5 +1,6 @@
 ### _Welomce to_
-# The Cocktail Cabinet
+# 🍸 The Cocktail Cabinet 🍸
+![Screenshot 2023-06-07 184948](https://github.com/hnm938/cocktail-cabinet-bootcamp/assets/130527417/e5a73bde-66ae-43ed-8168-ee104aa63671)
 
 The Cocktail Cabinet is a simple, easy-to-use, user friendly 
 go to cocktail app for cocktail enthusiasts.
